@@ -1,40 +1,43 @@
 import './App.css';
-
 import { useState } from 'react';
-
-import viteLogo from '/vite.svg';
-
-import reactLogo from './assets/react.svg';
+import Block from './Block';
+import ScoreBox from './ScoreBox';
 
 function App() {
-  const [count, setCount] = useState(0);
+  //To confirm that the color change according to the number
+  //Real project wouldn't be like this
+  const initialBoard = [
+    [0, 2, 4, 8],
+    [16, 32, 64, 128],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+  ];
+
+  const [board, setBoard] = useState(initialBoard);
+
+  const [score, setScore] = useState(0);
+
+  const newGame = () => {
+    setBoard(initialBoard);
+    setScore(0);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='game-container'>
+        <div className='game-header'>
+          <h1> 2048 </h1>
+          <ScoreBox title='SCORE' score={score} />
+        </div>
+        <div className='game-control'>
+          <button className='button-newGame' onClick={newGame}>New Game</button>
+        </div>
+        <div className='game-board'>
+          {board.flat().map((num, idx) => (
+            <Block num={num} key={idx} />
+          ))}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button
-          onClick={() => {
-            setCount(count + 1);
-          }}
-        >
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
