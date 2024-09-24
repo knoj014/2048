@@ -50,6 +50,7 @@ body {
 }
 
 .game-board {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 80px);
   grid-template-rows: repeat(4, 80px);
@@ -57,4 +58,32 @@ body {
   padding: 15px;
   border-radius: 10px;
   background-color: #bbada0;
+  z-index: 1;
+}
+
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.game-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.score-container {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
 }

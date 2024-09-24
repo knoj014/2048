@@ -1,4 +1,3 @@
-import React from 'react';
 import './ScoreBox.css';
 
 function ScoreBox(props: { title: string; score: number }) {

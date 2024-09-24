@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './Block.css'
 
 function Block({ num }: { num: number }) {
