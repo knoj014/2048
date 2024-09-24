@@ -8,7 +8,7 @@ function App() {
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
-    [0, 0, 0, 0]
+    [0, 0, 0, 0],
   ];
 
   const [board, setBoard] = useState(() => {
@@ -31,7 +31,7 @@ function App() {
   });
 
   function newGame() {
-    const newBoard = initialBoard.map(row => [...row]);
+    const newBoard = initialBoard.map((row) => [...row]);
     addNewBlock(newBoard, 2);
     setBoard(newBoard);
     setScore(0);
@@ -61,9 +61,8 @@ function App() {
     };
   }, [board, gameStatus]);
 
-  function handleKeyDown(e: { key: any; }) {
-    if (gameStatus)
-      return;
+  function handleKeyDown(e: { key: any }) {
+    if (gameStatus) return;
     switch (e.key) {
       case 'ArrowUp':
         moveBoard(0, -1);
@@ -80,15 +79,13 @@ function App() {
       default:
         break;
     }
-  };
+  }
 
   function checkGameStatus() {
-    if (board.flat().includes(128))
-      setGameStatus('You Win!');
+    if (board.flat().includes(128)) setGameStatus('You Win!');
     else {
       const hasEmptyCells = board.flat().some((cell: number) => cell === 0);
-      if (!hasEmptyCells)
-        setGameStatus('You Lose!');
+      if (!hasEmptyCells) setGameStatus('You Lose!');
     }
   }
 
@@ -108,44 +105,36 @@ function App() {
           newLine.splice(i + 1, 1);
         }
       }
-      while (newLine.length < 4)
-        newLine.push(0);
+      while (newLine.length < 4) newLine.push(0);
       return { newLine, scoreUpdate };
     };
 
     if (dx !== 0) {
       for (let i = 0; i < 4; i++) {
         let row = [...(newBoard[i] ?? [])];
-        if (dx === 1)
-          row.reverse();
+        if (dx === 1) row.reverse();
         let { newLine: newRow, scoreUpdate } = slideAndMerge(row);
         if (dx === 1) {
           row.reverse();
           newRow.reverse();
         }
-        if (scoreUpdate !== 0)
-          newScore += scoreUpdate;
-        if (newRow.join() !== row.join())
-          moved = true;
+        if (scoreUpdate !== 0) newScore += scoreUpdate;
+        if (newRow.join() !== row.join()) moved = true;
         newBoard[i] = newRow;
       }
     }
     if (dy !== 0) {
       for (let j = 0; j < 4; j++) {
         let column: number[] = [];
-        for (let i = 0; i < 4; i++)
-          column.push(newBoard[i]?.[j] ?? 0);
-        if (dy === 1)
-          column.reverse();
+        for (let i = 0; i < 4; i++) column.push(newBoard[i]?.[j] ?? 0);
+        if (dy === 1) column.reverse();
         let { newLine: newColumn, scoreUpdate } = slideAndMerge(column);
         if (dy === 1) {
           column.reverse();
           newColumn.reverse();
         }
-        if (scoreUpdate !== 0)
-          newScore += scoreUpdate;
-        if (newColumn.join() !== column.join())
-          moved = true;
+        if (scoreUpdate !== 0) newScore += scoreUpdate;
+        if (newColumn.join() !== column.join()) moved = true;
         for (let i = 0; i < 4; i++)
           (newBoard[i] as (number | undefined)[])[j] = newColumn[i];
       }
@@ -156,7 +145,7 @@ function App() {
       setScore(newScore);
       checkGameStatus();
     }
-  };
+  }
 
   function addNewBlock(board: number[][], num?: number) {
     let emptyCells = [];
@@ -167,31 +156,35 @@ function App() {
       }
     }
     if (emptyCells.length > 0) {
-      let { x = 0, y = 0 } = emptyCells[Math.floor(Math.random() * emptyCells.length)] || {};
-      (board[x] as (number | undefined)[])[y] = num ?? (Math.random() < 0.9 ? 2 : 4);
+      let { x = 0, y = 0 } =
+        emptyCells[Math.floor(Math.random() * emptyCells.length)] || {};
+      (board[x] as (number | undefined)[])[y] =
+        num ?? (Math.random() < 0.9 ? 2 : 4);
     }
   }
 
   return (
     <>
-      <div className='game-container'>
-        <div className='game-header'>
+      <div className="game-container">
+        <div className="game-header">
           <h1> 2048 </h1>
-          <div className='score-container'>
-            <ScoreBox title='SCORE' score={score} />
-            <ScoreBox title='BEST' score={bestScore} />
+          <div className="score-container">
+            <ScoreBox title="SCORE" score={score} />
+            <ScoreBox title="BEST" score={bestScore} />
           </div>
         </div>
-        <div className='game-control'>
-          <button className='button-newGame' onClick={newGame}>New Game</button>
+        <div className="game-control">
+          <button className="button-newGame" onClick={newGame}>
+            New Game
+          </button>
         </div>
-        <div className='game-board'>
+        <div className="game-board">
           {board.flat().map((num: number, idx: Key | null | undefined) => (
             <Block num={num} key={idx} />
           ))}
-          {gameStatus && <div className='game-overlay'></div>}
+          {gameStatus && <div className="game-overlay"></div>}
           {gameStatus && (
-            <div className='game-message'>
+            <div className="game-message">
               <h2>{gameStatus}</h2>
             </div>
           )}
