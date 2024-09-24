@@ -12,7 +12,8 @@ function Block({ num }: { num: number }) {
     128: { background: '#edd073', text: '#f9f6f2' },
   };
 
-  const { background, text } = colors[num] || defaultColor;
+  const color = colors[num] !== undefined ? colors[num] : defaultColor;
+  const { background, text } = color;
 
   return (
     <div className="block" style={{ backgroundColor: background, color: text }}>
