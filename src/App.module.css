@@ -13,31 +13,31 @@ body {
   background-color: #faf8ef;
 }
 
-.game-container {
+.gameContainer {
   text-align: center;
   align-items: center;
   flex-direction: column;
 }
 
-.game-header {
+.gameHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.game-header h1 {
+.gameHeader h1 {
   font-size: 55px;
   color: #776e65;
 }
 
-.game-control {
+.gameControl {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
-.button-newGame {
+.buttonNewGame {
   padding: 5px 15px;
   font-size: 16px;
   font-weight: bold;
@@ -49,7 +49,7 @@ body {
   margin-bottom: 10px;
 }
 
-.game-board {
+.gameBoard {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 80px);
@@ -61,7 +61,7 @@ body {
   z-index: 1;
 }
 
-.game-overlay {
+.gameOverlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -70,7 +70,7 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-.game-message {
+.gameMessage {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -82,7 +82,7 @@ body {
   pointer-events: none;
 }
 
-.score-container {
+.scoreContainer {
   display: flex;
   justify-content: space-between;
   width: 220px;

@@ -1,16 +1,19 @@
-.score-box {
+.scoreBox {
   width: 100px;
   padding: 5px;
   border-radius: 10px;
   text-align: center;
+  background-color: #bbada0;
 }
 
 .title {
   font-size: 12px;
   font-weight: bold;
+  color: #eee4da;
 }
 
 .score {
   font-size: 24px;
   font-weight: bold;
+  color: #ffffff;
 }
