@@ -1,5 +1,4 @@
-import './Block.css';
-
+import styles from './Block.module.css';
 import { BLOCK_COLORS, defaultColor } from './constants';
 import type { BlockColor } from './types';
 
@@ -8,7 +7,10 @@ function Block({ num }: { num: number }) {
   const { background, text } = color;
 
   return (
-    <div className="block" style={{ backgroundColor: background, color: text }}>
+    <div
+      className={styles.block}
+      style={{ backgroundColor: background, color: text }}
+    >
       {num !== 0 ? num : ''}
     </div>
   );

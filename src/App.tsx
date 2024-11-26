@@ -1,7 +1,6 @@
-import './App.css';
-
 import { type Key, useCallback, useEffect } from 'react';
 
+import styles from './App.module.css';
 import Block from './Block';
 import { moveDirection } from './constants';
 import ScoreBox from './ScoreBox';
@@ -34,26 +33,26 @@ function App() {
 
   return (
     <>
-      <div className="game-container">
-        <div className="game-header">
+      <div className={styles.gameContainer}>
+        <div className={styles.gameHeader}>
           <h1> 2048 </h1>
-          <div className="score-container">
+          <div className={styles.scoreContainer}>
             <ScoreBox title="SCORE" score={score} />
             <ScoreBox title="BEST" score={bestScore} />
           </div>
         </div>
-        <div className="game-control">
-          <button className="button-newGame" onClick={newGame}>
+        <div className={styles.gameControl}>
+          <button className={styles.buttonNewGame} onClick={newGame}>
             New Game
           </button>
         </div>
-        <div className="game-board">
+        <div className={styles.gameBoard}>
           {board.flat().map((num: number, idx: Key | null | undefined) => (
             <Block num={num} key={idx} />
           ))}
-          {gameStatus !== '' && <div className="game-overlay"></div>}
+          {gameStatus !== '' && <div className={styles.gameOverlay}></div>}
           {gameStatus !== '' && (
-            <div className="game-message">
+            <div className={styles.gameMessage}>
               <h2>{gameStatus}</h2>
             </div>
           )}
