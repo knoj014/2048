@@ -3,6 +3,21 @@ import { useCallback, useEffect, useState } from 'react';
 import { INITIAL_BOARD, WIN_SCORE } from './constants';
 import type { Board, GameStatus, MoveDirection } from './types';
 
+export const slideAndMerge = (line: number[]) => {
+  const newLine = line.filter((num: number) => num !== 0);
+  let scoreUpdate = 0;
+  for (let i = 0; i < newLine.length - 1; i++) {
+    if (newLine[i] === newLine[i + 1]) {
+      const newNum = (newLine[i] as number) * 2;
+      scoreUpdate += newNum;
+      newLine[i] = newNum;
+      newLine.splice(i + 1, 1);
+    }
+  }
+  while (newLine.length < 4) newLine.push(0);
+  return { newLine, scoreUpdate };
+};
+
 export function useGame() {
   const [board, setBoard] = useState<Board>(() => {
     const savedBoard = localStorage.getItem('board');
@@ -88,21 +103,6 @@ export function useGame() {
       const newBoard = board.map((row: number[]) => [...row]);
       let moved = false;
       let newScore = score;
-
-      const slideAndMerge = (line: number[]) => {
-        const newLine = line.filter((num: number) => num !== 0);
-        let scoreUpdate = 0;
-        for (let i = 0; i < newLine.length - 1; i++) {
-          if (newLine[i] === newLine[i + 1]) {
-            const newNum = (newLine[i] as number) * 2;
-            scoreUpdate += newNum;
-            newLine[i] = newNum;
-            newLine.splice(i + 1, 1);
-          }
-        }
-        while (newLine.length < 4) newLine.push(0);
-        return { newLine, scoreUpdate };
-      };
 
       if (dx !== 0) {
         for (let i = 0; i < 4; i++) {
